@@ -25,7 +25,7 @@ void FreeChain(chainptr chain)
 void _ExpandChain(chainptr chain)
 {
     chain->_length += ChainMaxLen;
-    chain->blocks = (blockptr*)realloc((Gptr)(chain->blocks), chain->_length);
+    chain->blocks = (blockptr*)realloc((Gptr)(chain->blocks), chain->_length * sizeof(blockptr));
 }
 
 // add a block
