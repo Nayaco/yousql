@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-#define nullptr             ((void*)NULL)
+#define nullptr             ((void*)0)
 
 typedef void                *Gptr;
 

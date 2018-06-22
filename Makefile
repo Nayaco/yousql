@@ -1,8 +1,8 @@
-CC  = gcc -m32 -static
+CC  = gcc -static
 CCL = gcc -static 
 INCLUDE = -I.
-DST = test.exe
-MODULE = lib/fs.o
+DST = test
+MODULE = lib/stack.o
 
 $(DST): $(MODULE) test.o
 	$(CC) test.o $(MODULE) -o $(DST) $(INCLUDE)
@@ -10,6 +10,6 @@ $(DST): $(MODULE) test.o
 test.o: test.c
 	$(CC) -c test.c -o test.o -O2 $(INCLUDE)
 
-lib/fs.o: lib/fs.c
-	$(CC) -c ./lib/fs.c -o ./lib/fs.o $(INCLUDE) -O2
+lib/stack.o: lib/stack.c
+	$(CC) -c ./lib/stack.c -o ./lib/stack.o $(INCLUDE) -O2
 
