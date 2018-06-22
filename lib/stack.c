@@ -23,18 +23,28 @@ void _ExpandStack(stackptr stack)
     stack->index = realloc(stack->index, stack->size * sizeof(Int32));
 }
 
+// reduce
+void _ReduceStack(stackptr stack)
+{
+    stack->size -= StackMaxLen;
+    stack->index = realloc(stack->index, stack->size * sizeof(Int32));
+}
+
 // push
 void Push(stackptr stack, Int32 val)
 {
     if(stack->cur >= stack->size)_ExpandStack(stack);
-    (stack->index)[stack->cur + 1] = val;
+    (stack->index)[stack->cur] = val;
     stack->cur++;
 }
 
 // pop
 Int32 Pop(stackptr stack)
 {
-    
+    if(stack->cur == 0)return -1;
+    Int32 val = (stack->index)[--stack->cur];
+    if(stack->cur <= stack->size - StackMaxLen)_ReduceStack(stack);
+    return val;
 }
 
 

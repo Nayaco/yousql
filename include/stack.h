@@ -43,12 +43,18 @@ void FreeStack(stackptr stack);
 void _ExpandStack(stackptr stack);
 
 /*
+* reduce a stack (It shouldn't be used as a puclic method)
+* @params stack:stackptr
+* @return void
+*/
+void _ReduceStack(stackptr stack);
+
+/*
 * push to a stack
 * @ params (stack:stackptr, val:Int32)
 * @ return void
 */
 void Push(stackptr stack, Int32 val);
-
 
 /*
 * pop an element

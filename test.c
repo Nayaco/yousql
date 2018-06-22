@@ -1,23 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "include/fs.h"
+#include "include/stack.h"
 
 
 int main(int argc, char const *argv[])
 {
-    IOPoolptr Pool = CreateIOPool();
-    if(Pool == NULL)exit(1);
-    const string filename = "io.txt";
-    Int32 ID = AddFile(Pool, filename, WFILE);
-    printf("ERROR");
-    char *str = "hello";
-    printf("%d\n", ID);
-    WriteFile(Pool, (Gptr)str, ID, strlen(str), 0, 0);
-    printf("ERROR");
-    CloseFile(Pool, ID);
-    printf("ERROR");
-    FreeIOPool(Pool);
-    printf("OKAY");
+    printf("dada\n");
+    stackptr stack = CreateStack();
+    int i = 0;
+    for(i = 0; i < 100; i++){
+        Push(stack, i + 10);
+    }
+    for(i = 0; i < 100; i++){
+        printf("| %d %d\n", stack->cur, stack->size);
+        printf("%d \n", Pop(stack));
+    }
+    printf("| %d %d\n", stack->cur, stack->size);
+    FreeStack(stack);
     return 0;
 }
