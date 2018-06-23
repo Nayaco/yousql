@@ -12,4 +12,3 @@ test.o: test.c
 
 lib/stack.o: lib/stack.c
 	$(CC) -c ./lib/stack.c -o ./lib/stack.o $(INCLUDE) -O2
-
