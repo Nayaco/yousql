@@ -42,3 +42,11 @@ boolean SetBlock(blockptr block, Gptr buffer, Int32 size)
 }
 
 // clear a block
+void ClearBlock(blockptr block)
+{
+    block->_size = 0;
+    free(block->_data);
+}
+
+//------------------------------------END------------------------------------------//
+

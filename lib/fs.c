@@ -119,5 +119,3 @@ boolean AppendFile(IOPoolptr Pool, Gptr buffer, const Int32 FileID, const Int32 
 }
 
 //------------------------------------END------------------------------------------//
-
-
