@@ -1,22 +1,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "include/stack.h"
-
+#include "include/block.h"
+#include "include/chain.h"
 
 int main(int argc, char const *argv[])
 {
-    printf("dada\n");
-    stackptr stack = CreateStack();
-    int i = 0;
-    for(i = 0; i < 100; i++){
-        Push(stack, i + 10);
+    chainptr chain = CreateChain();
+    printf("ERROR\n");
+    
+    char str[3] = "ha";
+    int i;
+    for(i = 0; i < 26; i++){
+        printf("ERROR\n");
+        str[0] = 'a' + i;
+        blockptr block = CreateBlock((Gptr)str, strlen(str));
+        AddChain(chain, block);
     }
-    for(i = 0; i < 100; i++){
-        printf("| %d %d\n", stack->cur, stack->size);
-        printf("%d \n", Pop(stack));
+    printf("ERROR\n");
+    char *str2 = "haha";
+    for(i = 0; i < 26; i++){
+        char *str3;
+        blockptr block = GetChain(chain, i);
+        str3 = GetPtr(block);
+        printf("%s\n", str3);
     }
-    printf("| %d %d\n", stack->cur, stack->size);
-    FreeStack(stack);
+    printf("ERROR\n");
     return 0;
 }

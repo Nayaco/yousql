@@ -15,6 +15,10 @@ IOPoolptr CreateIOPool()
 // Free a IOPool
 void FreeIOPool(IOPoolptr Pool)
 {
+    Int32 i = 0;
+    for(i = 0; i < Pool->_size; i++){
+        CloseFile(Pool, i);
+    }
     free(Pool->Buffer);
     free(Pool->files);
     free(Pool->_filemode);
@@ -86,6 +90,7 @@ boolean ReadFile(IOPoolptr Pool, const Int32 FileID, const Int32 size, const Int
     Int32 mode = Pool->_filemode[FileID] || 0x50;
     fileptr file = Pool->files[FileID];
     if(!mode)return 1;
+    if(feof(file))return 2;
     Pool->Buffer = realloc(Pool->Buffer, size + 1);
     fseek(file, offset, origin);
     Int32 _size = fread(Pool->Buffer, size, 1, file);
@@ -93,8 +98,23 @@ boolean ReadFile(IOPoolptr Pool, const Int32 FileID, const Int32 size, const Int
     return 0;   
 }
 
+// Readfile with user's buffer
+boolean ReadFileU(IOPoolptr Pool, const Int32 FileID, const Int32 size, const Int32 offset,  const Int32 origin, Gptr buffer)
+{
+    Int32 mode = Pool->_filemode[FileID] || 0x50;
+    fileptr file = Pool->files[FileID];
+    if(!mode)return 1;
+    if(feof(file))return 2;
+    buffer = calloc(1 , (size + 1));
+    fseek(file, offset, origin);
+    Int32 _size = fread(buffer, size, 1, file);
+    if(size != _size)return 2;
+    return 0;
+}
+
+
 // Writefile
-boolean WriteFile(IOPoolptr Pool, Gptr buffer ,const Int32 FileID, const Int32 size, const Int32 offset, const Int32 origin)
+boolean Write2File(IOPoolptr Pool, Gptr buffer ,const Int32 FileID, const Int32 size, const Int32 offset, const Int32 origin)
 {
     Int32 mode = Pool->_filemode[FileID] || 0x20;
     fileptr file = Pool->files[FileID];
