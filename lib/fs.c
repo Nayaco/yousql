@@ -73,7 +73,7 @@ Int32 AddFile(IOPoolptr Pool, const string filename, Int32 filemode)
     Pool->_filemode = (Int32*)realloc((void*)Pool->_filemode, sizeof(Int32)*index);
     Pool->files[index - 1] = file;
     Pool->_filemode[index - 1] = filemode;
-    return index - 1; 
+    return index - 1;
 }
 
 // Close a file
@@ -122,7 +122,7 @@ boolean Write2File(IOPoolptr Pool, Gptr buffer ,const Int32 FileID, const Int32 
     Pool->Buffer = realloc(Pool->Buffer, 0);
     fseek(file, offset, origin);
     Int32 _size = fwrite(buffer, size, 1, file);
-    if(size != _size)return 2;
+    if(_size != 1)return 2;
     return 0;  
 }
 
